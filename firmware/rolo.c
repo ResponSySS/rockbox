@@ -264,9 +264,13 @@ int rolo_load(const char* filename)
     storage_flush();
 #endif
 
+    lcd_clear_display();
+    lcd_puts(0, 0, "ROLO...");
     lcd_puts(0, 1, "Executing");
     lcd_update();
 #ifdef HAVE_REMOTE_LCD
+    lcd_remote_clear_display();
+    lcd_remote_puts(0, 0, "ROLO...");
     lcd_remote_puts(0, 1, "Executing");
     lcd_remote_update();
 #endif
@@ -378,12 +382,16 @@ int rolo_load(const char* filename)
     }
 
 #ifdef HAVE_STORAGE_FLUSH
-    lcd_puts(0, 1, "Flushing      ");
+    lcd_clear_display();
+    lcd_puts(0, 0, "ROLO...");
+    lcd_puts(0, 1, "Flushing storage buffers");
     lcd_update();
     storage_flush();
 #endif
 
-    lcd_puts(0, 1, "Executing     ");
+    lcd_clear_display();
+    lcd_puts(0, 0, "ROLO...");
+    lcd_puts(0, 1, "Executing");
     lcd_update();
 
     set_irq_level(HIGHEST_IRQ_LEVEL);
