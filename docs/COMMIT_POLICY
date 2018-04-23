@@ -1,0 +1,56 @@
+Git Commit Policy
+=================
+
+[Taken from: http://rockbox.org/wiki/GitCommitPolicy]
+
+Throughout this section, when we refer to "origin/master" we mean the canonical
+copy of master on the Rockbox server, not any branch named "master" in any
+other remote repository.
+
+  1. If you started with some version of origin/master, and then made a local
+  commit, and then when you try to push you find you are outdated: please
+  rebase your local branch onto the latest version of origin/master. Avoid
+  merging origin/master into your branch.
+
+  2. If you started with some version of origin/master, and then made multiple
+  local commits in a series: consider whether you should flatten the commits
+  before pushing. A good indicator that a series of commits should probably
+  be flattened into a single commit is if the intermediate states do not
+  compile or work, or if you cannot think of any way to describe them
+  individually other than "part N of M". The goal is for each commit to
+  represent a logical change: if your overall change is divided into three
+  logical steps, feel free to make three commits with appropriate titles
+  and descriptions, but if your three commits are "the changes I made on
+  Monday, the changes I made on Tuesday, and the changes I made on Wednesday"
+  then it is likely that the intermediate states are interesting to nobody,
+  not even you in the future, and flattening them is a clear improvement.
+
+  3. If you started with some version of origin/master, made some number of
+  local commits, and now want to update your branch to a newer version of
+  origin/master without submitting: rebase your local branch onto the latest
+  version of origin/master. Avoid merging origin/master into your branch.
+
+  4. If you publish a branch for collaboration with other people:
+
+      1. Don't rebase that branch while working on it. Rebasing a branch
+      you have published means everyone who has a copy of that branch needs
+      to manually fix things by rebasing their own work onto your rebased
+      changes, and nobody will be happy about this. In order to get new
+      changes from origin/master into a published branch, you will need to
+      merge origin/master into your branch.
+
+      2. When the work in the branch is done and you are ready to push back to
+      origin/master: please consider rewriting the branch (some combination
+      of flattening and rebasing), rather than just pushing it as-is. The
+      same logic as in 2. applies: it's nicer if the changes that end up
+      on origin/master represent logical steps, and it's likely that many
+      of the intermediate states are not interesting to anyone now that the
+      change is complete. However, this can be substantially more difficult,
+      depending exactly what changes occurred. It's always possible to simply
+      flatten the entire branch to a single commit, but that may remove too
+      much information. More complex rewrites are often hard. If you are
+      sufficiently confident of your git abilities, please do attempt it,
+      but it is okay to admit defeat and leave the branch either as-is,
+      or in a partially rewritten state which still contains merges. Before
+      pushing a branch in this condition, talk to other committers about it.
+
